@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Image\StoreRequest;
+use App\Http\Requests\Image\UpdateRequest;
 use App\Http\Resources\ImageResource;
 use App\Models\Image;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,7 +40,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         DB::beginTransaction();
 		try {
@@ -98,7 +99,7 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(UpdateRequest $request, Image $image)
     {
         DB::beginTransaction();
 		try {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -36,7 +37,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         DB::beginTransaction();
 		try {
@@ -85,7 +86,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
         DB::beginTransaction();
 		try {

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\StoreRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductResource;
-use App\Models\Image;
 use App\Models\Product;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {    
@@ -38,7 +37,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         DB::beginTransaction();
 		try {
@@ -90,7 +89,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateRequest $request, Product $product)
     {
         DB::beginTransaction();
 		try {
@@ -123,7 +122,7 @@ class ProductController extends Controller
         $product->categories()->detach();
         $product->images()->detach();
         $product->delete();
-        
+
         return response()->noContent();
     }
 }
