@@ -15,9 +15,12 @@ class ImageController extends Controller
     private $location = 'files/images/';
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/images",
+     *     summary="get list of images",
+     *     description="images list",tags={"images"},
+     *     @OA\Response(response="200", description="Success")
+     * )
      */
     public function index()
     {
@@ -35,10 +38,35 @@ class ImageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/images",
+     *      operationId="createimage",
+     *      tags={"images"},
+     *      summary="create images",
+     *      description="create images",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="create images",
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  type="object",
+     *                  required={
+     *                      "file",
+     *                  },
+     *                  @OA\Property(property="file", type="file", format="file", example=""),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successfully Created",
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content - Validation",
+     *       )
+     * )
      */
     public function store(StoreRequest $request)
     {
@@ -71,10 +99,30 @@ class ImageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/images/{id}",
+     *      operationId="getimagebyid",
+     *      tags={"images"},
+     *      summary="get image by id",
+     *      description="get image by id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="image id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     * )
      */
     public function show(Image $image)
     {
@@ -93,11 +141,48 @@ class ImageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/images/{id}",
+     *      operationId="updateimage",
+     *      tags={"images"},
+     *      summary="update image by id",
+     *      description="update image by id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="image id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="update image by id",
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  type="object",
+     *                  required={
+     *                      "file",
+     *                  },
+     *                  @OA\Property(property="file", type="file", format="file", example=""),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Content - Validation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     * )
      */
     public function update(UpdateRequest $request, Image $image)
     {
@@ -134,10 +219,30 @@ class ImageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/images/{id}",
+     *      operationId="deleteimage",
+     *      tags={"images"},
+     *      summary="delete image by id",
+     *      description="delete image by Id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="delete image by id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Success - No Content",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     * )
      */
     public function destroy(Image $image)
     {

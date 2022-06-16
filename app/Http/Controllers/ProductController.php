@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/products",
+     *     summary="get list of products",
+     *     description="products list",tags={"products"},
+     *     @OA\Response(response="200", description="Success")
+     * )
      */
     public function index()
     {
@@ -32,10 +35,42 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *   path="/products",
+     *   summary="create product",
+     *   description="create product",
+     *   operationId="createproduct",
+     *   tags={"products"},
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Pass user credentials",
+     *       @OA\JsonContent(
+     *           required={"name","description", "image_ids", "category_ids"},
+     *           @OA\Property(property="name", type="string", format="name", example="product name"),
+     *           @OA\Property(property="description", type="string", format="description", example="test desc"),
+     *           @OA\Property(
+     *               property="image_ids",
+     *               description="image_ids",
+     *               type="array",
+     *               @OA\Items(type="integer", format="id", example=1)
+     *           ),
+     *           @OA\Property(
+     *               property="category_ids",
+     *               description="category_ids",
+     *               type="array",
+     *               @OA\Items(type="integer", format="id", example=1)
+     *           ),
+     *       ),
+     *   ),
+     *   @OA\Response(
+     *       response=201,
+     *       description="Successfully Created"
+     *   ),
+     *   @OA\Response(
+     *      response=422,
+     *      description="Unprocessable Content - Validation",
+     *   )
+     * )
      */
     public function store(StoreRequest $request)
     {
@@ -61,10 +96,30 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/products/{id}",
+     *      operationId="getproductbyid",
+     *      tags={"products"},
+     *      summary="get product by id",
+     *      description="get product by id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     * )
      */
     public function show(Product $product)
     {
@@ -83,11 +138,55 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @OA\PUT(
+     *   path="/products/{id}",
+     *   summary="update product by id",
+     *   description="update product by id",
+     *   operationId="updateproduct",
+     *   tags={"products"},
+     *   @OA\Parameter(
+     *          name="id",
+     *          description="product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Pass user credentials",
+     *       @OA\JsonContent(
+     *           required={"name","description", "image_ids", "category_ids"},
+     *           @OA\Property(property="name", type="string", format="name", example="product name"),
+     *           @OA\Property(property="description", type="string", format="description", example="test desc"),
+     *           @OA\Property(
+     *               property="image_ids",
+     *               description="image_ids",
+     *               type="array",
+     *               @OA\Items(type="integer", format="id", example=1)
+     *           ),
+     *           @OA\Property(
+     *               property="category_ids",
+     *               description="category_ids",
+     *               type="array",
+     *               @OA\Items(type="integer", format="id", example=1)
+     *           ),
+     *       ),
+     *   ),
+     *   @OA\Response(
+     *       response=200,
+     *       description="Success"
+     *   ),
+     *   @OA\Response(
+     *      response=422,
+     *      description="Unprocessable Content - Validation",
+     *   ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     * )
      */
     public function update(UpdateRequest $request, Product $product)
     {
@@ -112,10 +211,30 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/products/{id}",
+     *      operationId="deleteproduct",
+     *      tags={"products"},
+     *      summary="delete product by id",
+     *      description="delete product by Id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="delete product by id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Success - No Content",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     * )
      */
     public function destroy(Product $product)
     {

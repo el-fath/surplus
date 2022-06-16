@@ -1,0 +1,547 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Surplus API Documentation",
+        "description": "L5 Swagger OpenApi Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/categories": {
+            "get": {
+                "tags": [
+                    "categories"
+                ],
+                "summary": "get list of categories",
+                "description": "categories list",
+                "operationId": "ead5fb1cf2a7453acb2e37928a1b1eaf",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "categories"
+                ],
+                "summary": "create category",
+                "description": "create category",
+                "operationId": "createcategory",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image_ids",
+                                    "category_ids"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "category name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully Created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "categories"
+                ],
+                "summary": "get category by id",
+                "description": "get category by id",
+                "operationId": "getcategorybyid",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "categories"
+                ],
+                "summary": "update category by id",
+                "description": "update category by id",
+                "operationId": "updatecategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image_ids",
+                                    "category_ids"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "category name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "categories"
+                ],
+                "summary": "delete category by id",
+                "description": "delete category by Id",
+                "operationId": "deletecategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete category by id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success - No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/images": {
+            "get": {
+                "tags": [
+                    "images"
+                ],
+                "summary": "get list of images",
+                "description": "images list",
+                "operationId": "f2dc6a8cdd6300fbb2b54a95d9061b77",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "images"
+                ],
+                "summary": "create images",
+                "description": "create images",
+                "operationId": "createimage",
+                "requestBody": {
+                    "description": "create images",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "format": "file",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully Created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    }
+                }
+            }
+        },
+        "/images/{id}": {
+            "get": {
+                "tags": [
+                    "images"
+                ],
+                "summary": "get image by id",
+                "description": "get image by id",
+                "operationId": "getimagebyid",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "image id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "images"
+                ],
+                "summary": "update image by id",
+                "description": "update image by id",
+                "operationId": "updateimage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "image id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "update image by id",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "format": "file",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "images"
+                ],
+                "summary": "delete image by id",
+                "description": "delete image by Id",
+                "operationId": "deleteimage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete image by id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success - No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "get list of products",
+                "description": "products list",
+                "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "create product",
+                "description": "create product",
+                "operationId": "createproduct",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image_ids",
+                                    "category_ids"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "product name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "description",
+                                        "example": "test desc"
+                                    },
+                                    "image_ids": {
+                                        "description": "image_ids",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": 1
+                                        }
+                                    },
+                                    "category_ids": {
+                                        "description": "category_ids",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": 1
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully Created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "get product by id",
+                "description": "get product by id",
+                "operationId": "getproductbyid",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "update product by id",
+                "description": "update product by id",
+                "operationId": "updateproduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image_ids",
+                                    "category_ids"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "product name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "description",
+                                        "example": "test desc"
+                                    },
+                                    "image_ids": {
+                                        "description": "image_ids",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": 1
+                                        }
+                                    },
+                                    "category_ids": {
+                                        "description": "category_ids",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": 1
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content - Validation"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "delete product by id",
+                "description": "delete product by Id",
+                "operationId": "deleteproduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete product by id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success - No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    }
+}
